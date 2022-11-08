@@ -1,9 +1,12 @@
 <?php
 
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\LoginController;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 
 
@@ -30,15 +33,12 @@ Route::get('/shopPro', function(){
 })->name('shopPro');
 
 
+Route::get('/login', [RegisterController::class,'login'])->name('login');
 
-Route::get('/login', function(){
-  return view('login') ;
-});
-
-Route::get('/register', function(){
-    return view('register') ;
-  });
+Route::post('/login', [RegisterController::class,'login_action'])->name('login.action');
 
 
-Route::post('/login', [UserController::class,'Login'])->name('login');
-Route::post('/register', [UserController::class,'RegisterController'])->name('register');
+
+Route::get('/register', [RegisterController::class,'Register'])->name('register');
+  
+  Route::post('/register', [RegisterController::class,'Register_action'])->name('register.action');
