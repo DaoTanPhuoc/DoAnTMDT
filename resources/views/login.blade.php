@@ -12,6 +12,9 @@
 					@if (session('sucess'))
 						<p class="alert alert-sucess">{{session('sucess')}}</p>
 					@endif
+                    @if (!empty($error))
+                    <p class="alert alert-sucess">{{$error}}</p>
+                    @endif
                     @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul>
