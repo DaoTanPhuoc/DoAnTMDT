@@ -54,6 +54,9 @@ class RegisterController extends Controller
       if (Auth::attempt($credentials)) {
          $request->session()->regenerate();
          return redirect()->route('index');
-      } else echo $request->password;
+      } else{
+         /* return redirect()->route('login')->with('error', 'Login failde. Please Login again!'); */
+         return view('login',['error' => 'login fail. Please Login again!']);
+      }
    }
 }
