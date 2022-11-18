@@ -42,3 +42,5 @@ Route::post('/login', [RegisterController::class,'login_action'])->name('login.a
 Route::get('/register', [RegisterController::class,'Register'])->name('register');
   
   Route::post('/register', [RegisterController::class,'Register_action'])->name('register.action');
+
+  Route::get('/logout', [RegisterController::class,'logout'])->name('logout');
