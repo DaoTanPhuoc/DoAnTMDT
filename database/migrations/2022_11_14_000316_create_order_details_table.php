@@ -17,9 +17,9 @@ return new class extends Migration
             $table->increments('id');
             $table->integer('order_id')->unsigned();
             $table->integer('product_id')->unsigned()->index();
-            $table->integer('quantity');
-            $table->float('price');
-            $table->float('sub_total');
+            $table->integer('quantity')->default(1);
+            $table->float('price')->default(0);
+            $table->float('sub_total')->default(0);
             $table->timestamps();
             $table->softDeletes();
             
