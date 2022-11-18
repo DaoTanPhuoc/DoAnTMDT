@@ -16,10 +16,10 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->increments("id");
             $table->string("order_number")->unique();
-            $table->string("transaction_date");
+            $table->date("transaction_date")->date(now());
             $table->integer('customer_id')->unsigned()->index();
-            $table->float("total_amount");
-            $table->string("status");
+            $table->float("total_amount")->default(0);
+            $table->string("status")->default('True');
             $table->timestamps();
             $table->softDeletes();
 
