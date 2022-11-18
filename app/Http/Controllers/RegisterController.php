@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Testing\Fluent\Concerns\Has;
 use Psy\Readline\Hoa\Console;
 
+use Illuminate\Support\Facades\Session;
+
 class RegisterController extends Controller
 {
    public function register()
@@ -52,11 +54,18 @@ class RegisterController extends Controller
       $request->password = Hash::make($request->password);
       $credentials = $request->only('email', 'password');
       if (Auth::attempt($credentials)) {
-         $request->session()->regenerate();
+         session(['isLogin' => '1']);
          return redirect()->route('index');
-      } else{
+      } else {
          /* return redirect()->route('login')->with('error', 'Login failde. Please Login again!'); */
-         return view('login',['error' => 'login fail. Please Login again!']);
+         return view('login', ['error' => 'Login falied. Please Login again!']);
       }
+   }
+
+   public function logout()
+   {
+      Session::flush();
+      Auth::logout();
+      return redirect()->route('index');
    }
 }
