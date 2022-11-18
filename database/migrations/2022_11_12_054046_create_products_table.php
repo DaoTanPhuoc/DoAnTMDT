@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('product_code')->unique();
             $table->string('product_name')->unique();
             $table->string('description');
-            $table->string('iamge');
+            $table->String('Image_product');
             $table->float('price')->default(0);
             $table->integer('brand_id')->unsigned()->index();
             $table->integer('category_id')->unsigned()->index();
