@@ -20,11 +20,9 @@ return new class extends Migration
             $table->string('description');
             $table->String('Image_product');
             $table->float('price')->default(0);
-            $table->integer('brand_id')->unsigned()->index();
             $table->integer('category_id')->unsigned()->index();
             $table->timestamps();
             $table->softDeletes();
-            
         });
     }
 
