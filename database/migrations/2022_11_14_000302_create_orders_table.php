@@ -15,15 +15,17 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->increments("id");
-            $table->string("order_number")->unique();
-            $table->date("transaction_date")->date(now());
-            $table->integer('customer_id')->unsigned()->index();
-            $table->float("total_amount")->default(0);
-            $table->string("status")->default('True');
+            $table->string("orderCode")->unique();
+            $table->integer('userId')->unsigned()->index();
+            $table->date('IssuedDate')->date(now());
+            $table->string('orderShipAddress');
+            $table->string('orderPhone');
+            $table->float('total')->default(0);
+            $table->boolean('status')->default(true);
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('customer_id')->references('id')->on('customers');
+            $table->foreign('userId')->references('id')->on('users');
         });
     }
 

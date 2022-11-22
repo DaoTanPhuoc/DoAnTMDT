@@ -4,6 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+use function PHPUnit\Framework\once;
+
 return new class extends Migration
 {
     /**
@@ -13,15 +15,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('customers', function (Blueprint $table) {
+        Schema::create('options', function (Blueprint $table) {
             $table->increments('id');
-            $table->string("first_name");
-            $table->string("last_name");
-            $table->string("email")->unique();
-            $table->string('postal_address');
-            $table->string('physical_address');
+            $table->integer('optionGroupId')->unsigned()->index();
+            $table->string('optionName');
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('optionGroupId')->references('id')->on('optionGroups');
         });
     }
 
@@ -32,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('customers');
+        Schema::dropIfExists('options');
     }
 };
