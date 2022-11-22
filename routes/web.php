@@ -3,6 +3,8 @@
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\CartsController;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
@@ -25,13 +27,20 @@ Route::get('/', function () {
     return view('index');
 })->name('index');
 
-Route::get('/shop',function(){
+/* Route::get('/shop',function(){
     return view('product-details');
 })->name('shop');
 Route::get('/shopPro', function(){
     return view('shop');
-})->name('shopPro');
-
+})->name('shopPro'); */
+Route::controller(ProductsController::class)->group(function(){
+    Route::get('products', 'index')->name('products');
+    Route::get('products/{id}','show');
+});
+Route::controller(UserController::class)->group(function(){
+    Route::get('user', 'index');
+});
+Route::get('/carts',[CartsController::class, 'index'])->middleware('auth')->name('carts');
 
 Route::get('/login', [RegisterController::class,'login'])->name('login');
 

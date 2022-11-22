@@ -19,7 +19,7 @@
                     @endif
                         <form method="POST" action="{{route('register.action')}}">
                             @csrf
-                            <input type="text" name="name" placeholder="Name" value="{{old('name')}}" />
+                            <input type="text" name="username" placeholder="Name" value="{{old('name')}}" />
                             
                             <input type="email" name="email" placeholder="Email Address"/>
                             <input type="password" name="password" placeholder="Password"/>
