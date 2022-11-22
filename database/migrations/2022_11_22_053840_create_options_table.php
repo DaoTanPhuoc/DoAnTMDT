@@ -4,6 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+use function PHPUnit\Framework\once;
+
 return new class extends Migration
 {
     /**
@@ -13,18 +15,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('options', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('product_code')->unique();
-            $table->string('product_name')->unique();
-            $table->string('description');
-            $table->String('Image_product');
-            $table->float('price')->default(0);
-            $table->integer('brand_id')->unsigned()->index();
-            $table->integer('category_id')->unsigned()->index();
+            $table->integer('optionGroupId')->unsigned()->index();
+            $table->string('optionName');
             $table->timestamps();
             $table->softDeletes();
-            
+
+            $table->foreign('optionGroupId')->references('id')->on('optionGroups');
         });
     }
 
@@ -35,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('options');
     }
 };
