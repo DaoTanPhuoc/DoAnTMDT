@@ -12,6 +12,7 @@ use Illuminate\Testing\Fluent\Concerns\Has;
 use Psy\Readline\Hoa\Console;
 
 use Illuminate\Support\Facades\Session;
+use Illuminate\Validation\Rules\Unique;
 
 class RegisterController extends Controller
 {
@@ -24,13 +25,13 @@ class RegisterController extends Controller
    public function register_action(Request $request)
    {
       $request->validate([
-         'name' => 'required',
-
+         'username' => 'required|unique:users',
+         'email' => 'required|unique:users|email',
          'password' => 'required',
 
       ]);
       $user = new User([
-         'name' => $request->name,
+         'userName' => $request->username,
          'email' => $request->email,
          'password' => Hash::make($request->password),
       ]);

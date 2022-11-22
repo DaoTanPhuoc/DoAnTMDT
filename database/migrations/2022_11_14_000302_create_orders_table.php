@@ -17,7 +17,7 @@ return new class extends Migration
             $table->increments("id");
             $table->string("orderCode")->unique();
             $table->integer('userId')->unsigned()->index();
-            $table->date('IssuedDate')->date(now());
+            $table->timestamp('IssuedDate');
             $table->string('orderShipAddress');
             $table->string('orderPhone');
             $table->float('total')->default(0);
